@@ -21,12 +21,13 @@ Each links to its full contract: arguments, what it creates, and what it respond
 
 ## Expanding the set: optional workflows
 
-Six more workflows are available beyond the core set. Three of them (`new`, `continue`, `ff`) create a change proposal artifact by artifact, instead of all at once like `propose`.
+Seven more workflows are available beyond the core set. Three of them (`new`, `continue`, `ff`) create a change proposal artifact by artifact, instead of all at once like `propose`.
 
 | Workflow | What it's for |
 |---|---|
 | [`new`](../reference/skills.md#openspec-new-change) | Start a change proposal as an empty scaffold |
 | [`continue`](../reference/skills.md#openspec-continue-change) | Create the next planning artifact in a change proposal, one at a time |
+| [`fix`](../reference/skills.md#openspec-fix-change) | Update an active change without creating a new proposal |
 | [`ff`](../reference/skills.md#openspec-ff-change) | Create a change proposal and every planning artifact implementation needs, in one pass |
 | [`verify`](../reference/skills.md#openspec-verify-change) | Check that the implementation matches the change proposal's artifacts |
 | [`bulk-archive`](../reference/skills.md#openspec-bulk-archive-change) | Archive several change proposals at once |

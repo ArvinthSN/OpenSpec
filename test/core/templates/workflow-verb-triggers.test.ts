@@ -24,6 +24,7 @@ const NATURAL_VERB_BY_WORKFLOW: Record<string, string> = {
   continue: 'continue',
   apply: 'apply',
   update: 'update change',
+  fix: 'fix',
   ff: 'ff',
   sync: 'sync',
   archive: 'archive',

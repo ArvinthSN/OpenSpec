@@ -23,6 +23,7 @@ export const ALL_WORKFLOWS = [
   'continue',
   'apply',
   'update',
+  'fix',
   'ff',
   'sync',
   'archive',
