@@ -35,8 +35,10 @@ you can update planning artifacts whenever implementation reveals something new.
 
 ```mermaid
 flowchart TD
+    Reqs["Requirement document<br/>(PDF/DOCX/MD/XLSX)"] --> ReqSkill["requirement-to-openspec<br/>(Generates openspec/planning.md)"]
+    ReqSkill --> Propose["/opsx:propose"]
     Idea["Idea or problem"] --> Explore["/opsx:explore<br/>(optional)"]
-    Idea --> Propose["/opsx:propose"]
+    Idea --> Propose
     Explore --> Propose
     Propose --> Review{"Planning artifacts<br/>ready?"}
     Review -->|"Refine"| Update["/opsx:update"]
@@ -53,6 +55,8 @@ flowchart TD
     Verified -->|"Ready"| Archive
     Sync --> Archive
 ```
+
+> **Starting from requirements?** Use the [`requirement-to-openspec`](requirement-to-openspec.md) skill installed by `openspec init` to convert PRD or specification documents directly into `openspec/planning.md` with ready-to-run `/opsx:propose` prompts.
 
 The AI assistant drives the workflow, while the CLI provides deterministic
 scaffolding, status, and artifact instructions:

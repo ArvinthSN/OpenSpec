@@ -9,7 +9,6 @@ import {
   getSkillTemplates,
 } from '../../../src/core/shared/skill-generation.js';
 import { transformToSkillReferences } from '../../../src/utils/command-references.js';
-// @ts-expect-error - plain ESM helper shared with the generator script
 import { SKILLS_DIR, stripVolatileFrontmatter } from '../../../scripts/skillssh-shared.mjs';
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -47,13 +46,18 @@ describe('skills.sh distribution parity', () => {
     // Untracked OS droppings like .DS_Store would fail the exact-set check
     // without telling us anything about the published tree, so hidden *files*
     // are tolerated; hidden directories still fail the dirs assertion.
-    const dirs = entries.filter((e) => e.isDirectory()).map((e) => e.name).sort();
+    // Static project skills like requirement-to-openspec are filtered from generated workflow checks.
+    const dirs = entries
+      .filter((e) => e.isDirectory() && e.name !== 'requirement-to-openspec')
+      .map((e) => e.name)
+      .sort();
     const files = entries
       .filter((e) => e.isFile() && !e.name.startsWith('.'))
       .map((e) => e.name)
       .sort();
     expect(dirs).toEqual(expectedDirs);
     expect(files).toEqual(['README.md']);
+    expect(entries.some((e) => e.isDirectory() && e.name === 'requirement-to-openspec')).toBe(true);
 
     for (const dir of dirs) {
       const inner = readdirSync(join(skillsRoot, dir), { withFileTypes: true }).filter(

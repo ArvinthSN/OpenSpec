@@ -34,6 +34,7 @@
     "dist",
     "bin",
     "schemas",
+    "skills/requirement-to-openspec",
     "!dist/**/*.test.js",
     "!dist/**/__tests__",
     "!dist/**/*.map"

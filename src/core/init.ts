@@ -60,6 +60,7 @@ import {
   toolSupportsSkills,
   type ToolSkillStatus,
   formatIdeRestart,
+  installRequirementSkill,
 } from './shared/index.js';
 import { getGlobalConfig, type Delivery, type Profile } from './global-config.js';
 import { getProfileWorkflows, CORE_WORKFLOWS, ALL_WORKFLOWS } from './profiles.js';
@@ -211,15 +212,15 @@ export class InitCommand {
         if (pointer.malformed) {
           throw new Error(
             `The store declaration in ${pointer.filePath} is invalid (` +
-              storePointerProblem(pointer.malformed) +
-              `). Fix or remove the store: line before running openspec init.`
+            storePointerProblem(pointer.malformed) +
+            `). Fix or remove the store: line before running openspec init.`
           );
         }
         if (pointer.value !== undefined) {
           if (path.resolve(guardRoot) !== projectPath) {
             throw new Error(
               `This repo's planning is externalized to store '${pointer.value}' (${pointer.filePath}). ` +
-                'Run openspec init from the pointer repo root to install integrations.'
+              'Run openspec init from the pointer repo root to install integrations.'
             );
           }
 
@@ -1007,6 +1008,15 @@ export class InitCommand {
             FileSystemUtils.assertPathWithin(tool.skillsRoot, skillFile);
             await FileSystemUtils.writeFile(skillFile, skillContent);
           }
+
+          // Install requirement-to-openspec project skill
+          await installRequirementSkill({
+            skillsPath: tool.skillsPath,
+            skillsRoot: tool.skillsRoot,
+            force: this.force,
+            version: OPENSPEC_VERSION,
+          });
+
           writeSharedSkillTarget(projectPath, tool.value);
         }
         if (
@@ -1318,7 +1328,7 @@ export class InitCommand {
         console.log(
           chalk.dim(
             `Left your existing ${copilot.collisions.join(' and ')} untouched — add the OpenSpec ` +
-              `install step by hand so the Copilot cloud agent can run openspec.`
+            `install step by hand so the Copilot cloud agent can run openspec.`
           )
         );
       }
@@ -1428,8 +1438,8 @@ export class InitCommand {
       console.log(
         chalk.yellow(
           `No skills or commands were generated for ${names}: delivery is set to 'commands' but ` +
-            `${zeroArtifactTools.length === 1 ? 'it supports' : 'they support'} only skills. ` +
-            `Run 'openspec config set delivery both' to generate skills.`
+          `${zeroArtifactTools.length === 1 ? 'it supports' : 'they support'} only skills. ` +
+          `Run 'openspec config set delivery both' to generate skills.`
         )
       );
     }

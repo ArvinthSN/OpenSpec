@@ -42,3 +42,17 @@ export {
   resolveIdeRestartSurface,
   formatIdeRestart,
 } from './ide-restart.js';
+
+export {
+  REQUIREMENT_SKILL_NAME,
+  installRequirementSkill,
+  getRequirementSkillSourceDir,
+  setRequirementSkillSourceDir,
+  resetRequirementSkillSourceDir,
+  isRequirementSkillFileModified,
+  injectGeneratedBy,
+  collectSkillFiles,
+  type InstallRequirementSkillOptions,
+  type InstallRequirementSkillResult,
+} from './requirement-skill.js';
+

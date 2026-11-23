@@ -36,7 +36,8 @@ export function cleanSkillSubdirectories(outDir) {
     }
   }
   for (const entry of entries) {
-    if (entry.isDirectory()) {
+    // Preserve static project-level skills like requirement-to-openspec
+    if (entry.isDirectory() && entry.name !== 'requirement-to-openspec') {
       rmSync(join(outDir, entry.name), { recursive: true, force: true });
     }
   }

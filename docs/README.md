@@ -46,6 +46,7 @@ That second one matters more than it looks. OpenSpec has two halves: a command l
 |-----|-------------------|
 | [Getting Started](getting-started.md) | Install, initialize, and run your first change end to end |
 | [Explore First](explore.md) | Use `/opsx:explore` to think through an idea before you commit |
+| [Requirements to OpenSpec](requirement-to-openspec.md) | Convert PRDs, SRS, and requirement documents into OpenSpec planning (`openspec/planning.md`) |
 | [How Commands Work](how-commands-work.md) | Where slash commands run, what "interactive mode" means, terminal vs chat |
 | [Core Concepts at a Glance](overview.md) | The whole mental model on one page: specs, changes, deltas, archive |
 | [Installation](installation.md) | npm, pnpm, yarn, bun, Nix, a prompt that hands setup to your AI assistant, and how to verify it worked |
