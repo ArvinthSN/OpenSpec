@@ -229,6 +229,10 @@ export const WORKFLOW_PROMPT_META: Record<string, WorkflowPromptMeta> = {
     name: 'Onboard',
     description: 'Guided onboarding flow for OpenSpec',
   },
+  'propose-all': {
+    name: 'Propose all',
+    description: 'Batch propose changes from a planning document',
+  },
 };
 
 

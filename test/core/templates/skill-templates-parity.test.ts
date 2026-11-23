@@ -26,6 +26,8 @@ import {
   getOpsxSyncCommandTemplate,
   getOpsxProposeCommandTemplate,
   getOpsxProposeSkillTemplate,
+  getOpsxProposeAllCommandTemplate,
+  getOpsxProposeAllSkillTemplate,
   getOpsxUpdateCommandTemplate,
   getOpsxVerifyCommandTemplate,
   getSyncSpecsSkillTemplate,
@@ -98,6 +100,8 @@ const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
   getOpsxVerifyCommandTemplate: 'ddc3fe6d529c82703ac131fb4383e4ae1f8df152d11afd75ae74ca17b12f1b24',
   getOpsxProposeSkillTemplate: 'd5e0e2d675cedaffbd771892f15edd8f7f55b464ee42362b1572aa59c4c1d492',
   getOpsxProposeCommandTemplate: 'f30af4ce5b7677bd664da71dd6d616a93278335e8828a7c3442fab59c339a11b',
+  getOpsxProposeAllSkillTemplate: '05f5c9a19057761d07b0419560e969494f9e0710122248b96e46171abc5c98a0',
+  getOpsxProposeAllCommandTemplate: '120f663d3342ff1bb53e23d8985179fa080854e541ba0fdb774ae55792f26b8a',
   getFeedbackSkillTemplate: 'dabeb5e825b9349abc8156c3e7b8608f27987912a6d9bf47ef29addde6138133',
   getUpdateChangeSkillTemplate: '14c209b8a18d1b100d372b0ef96707b70a7c64117a16309ee463f66d39180b3e',
   getOpsxUpdateCommandTemplate: '33528a80c9436c9dad74084a37d2fce5e78e34abfb71185fa21495a4f2a8b4d3',
@@ -115,6 +119,7 @@ const EXPECTED_GENERATED_SKILL_CONTENT_HASHES: Record<string, string> = {
   'openspec-verify-change': '082453eb0a8079a4c1c72c243373bf6489ebac56f9adaa8b58588047823ded0d',
   'openspec-onboard': '6993eff867d97d485e080078f9dfb80e968e242f3b17a924eeb077715fd548fa',
   'openspec-propose': '2bbfc169f483cbacc481bf5160aece61d5237e1bca80955f48f7e2a4814e6143',
+  'openspec-propose-all': '67d8d3d546c1543532eef3438c7d74258d10783d0b654657cf36c35818025d05',
   'openspec-update-change': 'a6fc9d6972bfb024b91f0a01e14d8a7666ae641bcad83cfae937e41dcccc545a',
 };
 
@@ -132,6 +137,7 @@ const GENERATED_SKILL_FACTORIES: Array<[string, () => SkillTemplate]> = [
   ['openspec-verify-change', getVerifyChangeSkillTemplate],
   ['openspec-onboard', getOnboardSkillTemplate],
   ['openspec-propose', getOpsxProposeSkillTemplate],
+  ['openspec-propose-all', getOpsxProposeAllSkillTemplate],
   ['openspec-update-change', getUpdateChangeSkillTemplate],
 ];
 
@@ -225,6 +231,8 @@ describe('skill templates split parity', () => {
       getOpsxVerifyCommandTemplate,
       getOpsxProposeSkillTemplate,
       getOpsxProposeCommandTemplate,
+      getOpsxProposeAllSkillTemplate,
+      getOpsxProposeAllCommandTemplate,
       getFeedbackSkillTemplate,
       getUpdateChangeSkillTemplate,
       getOpsxUpdateCommandTemplate,

@@ -148,7 +148,7 @@ Explore never writes code, and writes nothing else unless you ask, or say yes wh
 
 ### Expanded/Full Workflow (custom selection)
 
-If you want explicit scaffold-and-build commands (`/opsx:new`, `/opsx:continue`, `/opsx:ff`, `/opsx:verify`, `/opsx:bulk-archive`, `/opsx:onboard`), enable them with:
+If you want explicit scaffold-and-build commands (`/opsx:new`, `/opsx:continue`, `/opsx:ff`, `/opsx:verify`, `/opsx:bulk-archive`, `/opsx:propose-all`, `/opsx:onboard`), enable them with:
 
 ```bash
 openspec config profile
@@ -320,6 +320,42 @@ AI:  ✓ Archived add-dark-mode
 ```
 
 Bulk archive detects when multiple changes touch the same specs and resolves conflicts by checking what's actually implemented.
+
+### Batch Proposals from Planning Documents
+
+When you have a comprehensive requirement or planning document (e.g., `OpenSpec_Requirement_Analysis_and_Planning.md` or a PRD) covering multiple capabilities:
+
+```text
+Requirement Doc ──► /opsx:propose-all ──► Review & Approval ──► Multiple Changes
+```
+
+```text
+You: /opsx:propose-all
+
+AI:  Located requirement document: OpenSpec_Requirement_Analysis_and_Planning.md
+     Analyzing requirements and extracting 3 proposed specifications:
+     1. identity-and-access (Dependencies: None)
+     2. customer-profile (Dependencies: identity-and-access)
+     3. billing-subscription (Dependencies: customer-profile)
+
+     [Presents full proposal plan with specification inventory, prompts, and coverage validation]
+
+     How would you like to proceed?
+     - Option 1 — Approve All
+     - Option 2 — Modify
+     - Option 3 — Exclude Specifications
+     - Option 4 — Cancel
+
+You: Option 1
+
+AI:  Approved! Creating changes in dependency order...
+     ✓ Created openspec/changes/identity-and-access/
+     ✓ Created openspec/changes/customer-profile/
+     ✓ Created openspec/changes/billing-subscription/
+     All artifacts validated and ready for review.
+```
+
+The command guarantees human oversight via a mandatory review gate, never overwrites existing changes silently, and handles dependency ordering automatically.
 
 ### Completing a Change
 
@@ -545,6 +581,7 @@ For full command details and options, see [Commands](commands.md).
 | `/opsx:sync` | Merge delta specs | Expanded mode, optional |
 | `/opsx:archive` | Complete the change | All work finished |
 | `/opsx:bulk-archive` | Archive multiple changes | Expanded mode, parallel work |
+| `/opsx:propose-all` | Batch propose multiple changes | Expanded mode, from planning doc |
 
 ## Next Steps
 

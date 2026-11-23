@@ -65,7 +65,7 @@ openspec init
 
 This creates skills in `.claude/skills/` (or equivalent) that AI coding assistants auto-detect.
 
-By default, OpenSpec uses the `core` workflow profile (`propose`, `explore`, `apply`, `update`, `sync`, `archive`). If you want the expanded workflow commands (`new`, `continue`, `ff`, `verify`, `bulk-archive`, `onboard`), configure them with `openspec config profile` and apply with `openspec update`.
+By default, OpenSpec uses the `core` workflow profile (`propose`, `explore`, `apply`, `update`, `sync`, `archive`). If you want the expanded workflow commands (`new`, `continue`, `ff`, `verify`, `bulk-archive`, `propose-all`, `onboard`), configure them with `openspec config profile` and apply with `openspec update`.
 
 During setup, you'll be prompted to create a **project config** (`openspec/config.yaml`). This is optional but recommended.
 
@@ -168,6 +168,7 @@ rules:
 | `/opsx:sync` | Merge delta specs into main specs (optional) |
 | `/opsx:archive` | Archive when done |
 | `/opsx:bulk-archive` | Archive multiple completed changes (expanded workflow) |
+| `/opsx:propose-all` | Batch propose multiple changes from planning doc (expanded workflow) |
 | `/opsx:onboard` | Guided walkthrough of an end-to-end change (expanded workflow) |
 
 ## Usage

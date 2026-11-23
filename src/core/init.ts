@@ -125,6 +125,7 @@ const WORKFLOW_TO_SKILL_DIR: Record<string, string> = {
   'verify': 'openspec-verify-change',
   'onboard': 'openspec-onboard',
   'propose': 'openspec-propose',
+  'propose-all': 'openspec-propose-all',
 };
 
 // -----------------------------------------------------------------------------

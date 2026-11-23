@@ -31,6 +31,7 @@ for your tool. The files OpenSpec generates already use the right form.
 | `/opsx:ff` | Fast-forward: create all planning artifacts at once |
 | `/opsx:verify` | Validate implementation matches artifacts |
 | `/opsx:bulk-archive` | Archive multiple changes at once |
+| `/opsx:propose-all` | Batch propose multiple changes from planning doc |
 | `/opsx:onboard` | Guided tutorial through the complete workflow |
 
 The default global profile is `core`. To enable expanded workflow commands, run `openspec config profile`, select workflows, then run `openspec update` in your project.
@@ -615,6 +616,120 @@ AI:  ✓ Archived add-dark-mode
 - Conflict resolution is agentic (checks codebase)
 - Changes are archived in order of creation
 - Prompts before overwriting spec content
+
+---
+
+### `/opsx:propose-all`
+
+Batch propose multiple OpenSpec changes from a requirement-analysis and planning document with review and approval.
+
+**Why it's useful:**
+When starting a substantial feature or project with an existing requirement specification or PRD, manually creating dozens of proposals one-by-one is tedious. `/opsx:propose-all` reads the full requirement document, dynamically identifies all proposed specifications and their prompts, constructs a dependency-ordered plan, presents it for mandatory human review and approval, and then generates each approved change with all artifacts (`proposal.md`, `specs/`, `design.md`, `tasks.md`).
+
+**How it differs from `/opsx:propose`:**
+- `/opsx:propose`: Creates a **single** OpenSpec change from an interactive prompt or description.
+- `/opsx:propose-all`: Parses an entire planning document, maps requirements across **multiple** specifications, performs dependency analysis, enforces an approval gate, and batch-creates independent OpenSpec changes in topological order.
+
+**Syntax:**
+```text
+/opsx:propose-all [path-to-requirements-doc]
+```
+
+**Input Document:**
+- **Default filename**: `OpenSpec_Requirement_Analysis_and_Planning.md` in the current working directory / project root.
+- **Custom path**: Provide as argument, e.g. `/opsx:propose-all path/to/prd.md`.
+- **Fallbacks**: If the default is not found, it checks `openspec/planning.md` and `planning.md`, or asks the user for the path.
+
+**What it does:**
+1. **Full Requirement Analysis**: Thoroughly reads the complete document. Identifies project goals, constraints, and dynamically extracts all proposed specifications along with their exact proposal prompts, covered requirements, deliverables, and dependencies.
+2. **Consolidated Proposal Plan**: Prepares a review plan containing:
+   - Project summary
+   - Specification inventory table
+   - Proposal prompt inventory (exact prompts preserved)
+   - Dependency analysis & implementation sequence
+   - Requirement coverage validation
+3. **Mandatory Review & Approval Gate**: Enforces a strict pause before generating any files. Presents 4 options:
+   - **Option 1 — Approve All**: Creates all approved proposals in dependency order.
+   - **Option 2 — Modify**: Update specification names, scope, prompts, or dependencies (requires re-approval).
+   - **Option 3 — Exclude Specifications**: Exclude selected specifications; re-evaluates dependency impacts.
+   - **Option 4 — Cancel**: Safely aborts without creating files.
+4. **Batch Sequential Generation**: For each approved specification:
+   - Checks for change-name conflicts.
+   - Scaffolds a separate change (`openspec/changes/<change-name>/`).
+   - Generates all schema artifacts (`proposal.md`, `specs/`, `design.md`, `tasks.md`).
+   - Validates each change with `openspec validate "<change-name>"`.
+5. **Conflict Handling & Resilience**:
+   - Never silently overwrites existing changes.
+   - If an individual proposal fails, downstream dependent proposals are safely skipped while independent proposals continue.
+6. **Final Execution Report**: Summarizes results, status, locations, and provides handoff to `/opsx:apply`.
+
+**Example:**
+```text
+You: /opsx:propose-all
+
+AI:  Located requirement document: OpenSpec_Requirement_Analysis_and_Planning.md
+     Analyzing full requirements and extracting proposed specifications...
+
+     ## Consolidated Proposal Plan
+
+     ### Project Summary
+     Multi-tenant SaaS platform with OAuth2 authentication, tenant configuration, and billing.
+
+     ### Specification Inventory
+     | # | Specification | Purpose | Requirements Covered | Dependencies |
+     |---|---|---|---|---|
+     | 1 | identity-and-access | OAuth2 and session authentication | FR-1, FR-2 | None |
+     | 2 | customer-profile | User profile and organization settings | FR-3 | identity-and-access |
+     | 3 | billing-subscription | Subscription plans and payment processing | FR-4, NFR-2 | customer-profile |
+
+     ### Proposal Prompt Inventory
+     - 1. identity-and-access: "Create proposal for identity-and-access covering OAuth2, JWT tokens, and user credentials."
+     - 2. customer-profile: "Create proposal for customer-profile with address book and org settings."
+     - 3. billing-subscription: "Create proposal for billing-subscription covering Stripe webhooks and plan tiers."
+
+     ### Dependency Order
+     1. identity-and-access
+     2. customer-profile
+     3. billing-subscription
+
+     Coverage Check: 100% of functional requirements covered. No circular dependencies.
+
+     How would you like to proceed?
+     - Option 1 — Approve All
+     - Option 2 — Modify
+     - Option 3 — Exclude Specifications
+     - Option 4 — Cancel
+
+You: Option 1
+
+AI:  Approved! Generating proposals in dependency order...
+
+     [1/3] Creating identity-and-access...
+     - Scaffolded openspec/changes/identity-and-access/
+     - Created proposal.md, specs/auth/spec.md, design.md, tasks.md
+     - Validated: ✓
+
+     [2/3] Creating customer-profile...
+     - Scaffolded openspec/changes/customer-profile/
+     - Created proposal.md, specs/profile/spec.md, design.md, tasks.md
+     - Validated: ✓
+
+     [3/3] Creating billing-subscription...
+     - Scaffolded openspec/changes/billing-subscription/
+     - Created proposal.md, specs/billing/spec.md, design.md, tasks.md
+     - Validated: ✓
+
+     ## OpenSpec Batch Proposal Results
+     Total identified: 3 | Approved: 3 | Created: 3 | Failed: 0 | Skipped: 0
+
+     | # | Specification | Status | Change Name | Location |
+     |---|---|---|---|---|
+     | 1 | identity-and-access | Validated | identity-and-access | openspec/changes/identity-and-access/ |
+     | 2 | customer-profile | Validated | customer-profile | openspec/changes/customer-profile/ |
+     | 3 | billing-subscription | Validated | billing-subscription | openspec/changes/billing-subscription/ |
+
+     All approved proposal artifacts are ready. When you are ready to implement a change, run `/opsx:apply <change-name>`.
+```
 
 ---
 

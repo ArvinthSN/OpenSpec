@@ -108,7 +108,7 @@ describe('generated files never name an uninstalled workflow', () => {
     }
 
     expect([...named].sort()).toEqual(
-      [...ALL_WORKFLOWS].filter((id) => id !== 'bulk-archive').sort()
+      [...ALL_WORKFLOWS].filter((id) => id !== 'bulk-archive' && id !== 'propose-all').sort()
     );
   });
 

@@ -111,6 +111,7 @@ const LEGACY_GLOBAL_CODEX_WORKFLOWS: Record<string, readonly WorkflowId[]> = {
   'opsx-bulk-archive.md': ['bulk-archive'],
   'opsx-verify.md': ['verify'],
   'opsx-onboard.md': ['onboard'],
+  'opsx-propose-all.md': ['propose-all'],
 };
 
 /**

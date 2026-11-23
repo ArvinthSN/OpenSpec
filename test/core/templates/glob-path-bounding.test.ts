@@ -15,6 +15,8 @@ import {
   getOpsxFfCommandTemplate,
   getOpsxProposeCommandTemplate,
   getOpsxProposeSkillTemplate,
+  getOpsxProposeAllCommandTemplate,
+  getOpsxProposeAllSkillTemplate,
   getOpsxUpdateCommandTemplate,
   getUpdateChangeSkillTemplate,
 } from '../../../src/core/templates/skill-templates.js';
@@ -48,6 +50,8 @@ const boundFor = (label: string) => (label.startsWith('update-change') ? CREATE_
 const SURFACES: Array<[label: string, body: string]> = [
   ['propose skill', withAllWorkflows(getOpsxProposeSkillTemplate().instructions)],
   ['propose command', withAllWorkflows(getOpsxProposeCommandTemplate().content)],
+  ['propose-all skill', withAllWorkflows(getOpsxProposeAllSkillTemplate().instructions)],
+  ['propose-all command', withAllWorkflows(getOpsxProposeAllCommandTemplate().content)],
   ['ff-change skill', withAllWorkflows(getFfChangeSkillTemplate().instructions)],
   ['ff-change command', withAllWorkflows(getOpsxFfCommandTemplate().content)],
   ['continue-change skill', withAllWorkflows(getContinueChangeSkillTemplate().instructions)],
