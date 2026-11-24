@@ -9,11 +9,15 @@ import {
 describe('profiles', () => {
   describe('CORE_WORKFLOWS', () => {
     it('should contain the default core workflows', () => {
-      expect(CORE_WORKFLOWS).toEqual(['propose', 'explore', 'apply', 'update', 'sync', 'archive']);
+      expect(CORE_WORKFLOWS).toEqual(['propose', 'explore', 'apply', 'update', 'sync', 'archive', 'propose-all']);
     });
 
     it('should include update in the core profile (default install, not expanded-only)', () => {
       expect(CORE_WORKFLOWS).toContain('update');
+    });
+
+    it('should include propose-all in the core profile', () => {
+      expect(CORE_WORKFLOWS).toContain('propose-all');
     });
 
     it('should be a subset of ALL_WORKFLOWS', () => {

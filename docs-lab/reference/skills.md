@@ -54,6 +54,7 @@ Commands are always the second case. A project whose `openspec/config.yaml` name
 | [openspec-update-change](#openspec-update-change) | Revise a change proposal's plan | Core |
 | [openspec-sync-specs](#openspec-sync-specs) | Merge a change proposal's spec updates into `specs/` | Core |
 | [openspec-archive-change](#openspec-archive-change) | Move a finished change proposal to the archive | Core |
+| [openspec-propose-all](#openspec-propose-all) | Batch-create change proposals from a planning document | Core |
 | [openspec-new-change](#openspec-new-change) | Start a change proposal as an empty scaffold | Optional |
 | [openspec-continue-change](#openspec-continue-change) | Create the next planning artifact, one at a time | Optional |
 | [openspec-ff-change](#openspec-ff-change) | Create a change proposal with every artifact implementation needs, in one pass | Optional |
@@ -123,6 +124,16 @@ Move a finished change proposal to the archive.
 | **Arguments** | A change proposal name, optional. |
 | **Creates** | Moves the change proposal folder to `openspec/changes/archive/YYYY-MM-DD-<name>/` (no date added if the name already starts with one). With your approval it first syncs outstanding delta specs. When `openspec-sync-specs` is installed, it runs that workflow. Otherwise, it merges the delta specs into the main specs itself. Never code. |
 | **Response** | Warns and asks before archiving with incomplete artifacts or tasks, and asks whether to sync when delta specs exist. Ends with a summary: name, schema, archive location, spec sync status, and any warnings. |
+
+## openspec-propose-all
+
+Batch-create multiple change proposals from a requirement analysis and planning document.
+
+| Contract | Description |
+|---|---|
+| **Arguments** | An optional file path to a requirement analysis or planning document. Defaults to `OpenSpec_Requirement_Analysis_and_Planning.md`. |
+| **Creates** | An independent change directory `openspec/changes/<name>/` with full artifacts (`proposal.md`, `specs/`, `design.md`, `tasks.md`) for every approved proposal in the batch. Never code. |
+| **Response** | Full requirement analysis, dependency graph, proposal plan with review and approval gate, and execution summary. Stops there; implementation waits for `openspec-apply-change`. |
 
 ## openspec-new-change
 

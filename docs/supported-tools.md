@@ -19,7 +19,7 @@ By default, OpenSpec uses the `core` profile, which includes:
 - `sync`
 - `archive`
 
-You can enable expanded workflows (`new`, `continue`, `ff`, `verify`, `bulk-archive`, `propose-all`, `onboard`) via `openspec config profile`, then run `openspec update`.
+You can enable expanded workflows (`new`, `continue`, `ff`, `verify`, `bulk-archive`, `onboard`) via `openspec config profile`, then run `openspec update`.
 
 ## How To Invoke
 

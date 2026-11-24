@@ -131,9 +131,11 @@ All approved proposal artifacts are ready. When you are ready to implement a cha
 
 ---
 
-## How to Enable
+## Availability
 
-`/opsx:propose-all` is available in the expanded workflow set. To enable it in your project:
+`/opsx:propose-all` is available by default in the `core` workflow profile on `openspec init`.
+
+If you are using a `custom` profile and want to ensure it is installed:
 
 1. Configure your workflow profile:
    ```bash

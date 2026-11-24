@@ -21,6 +21,7 @@ for your tool. The files OpenSpec generates already use the right form.
 | `/opsx:update` | Revise a change's planning artifacts and keep them coherent |
 | `/opsx:sync` | Merge delta specs into main specs |
 | `/opsx:archive` | Archive a completed change |
+| `/opsx:propose-all` | Batch propose multiple changes from planning doc |
 
 ### Expanded Workflow Commands (custom workflow selection)
 
@@ -31,7 +32,6 @@ for your tool. The files OpenSpec generates already use the right form.
 | `/opsx:ff` | Fast-forward: create all planning artifacts at once |
 | `/opsx:verify` | Validate implementation matches artifacts |
 | `/opsx:bulk-archive` | Archive multiple changes at once |
-| `/opsx:propose-all` | Batch propose multiple changes from planning doc |
 | `/opsx:onboard` | Guided tutorial through the complete workflow |
 
 The default global profile is `core`. To enable expanded workflow commands, run `openspec config profile`, select workflows, then run `openspec update` in your project.

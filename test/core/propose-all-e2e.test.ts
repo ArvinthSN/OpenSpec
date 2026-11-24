@@ -84,6 +84,54 @@ describe('propose-all end-to-end integration', () => {
     expect(cursorCommandContent).toContain('id: "opsx-propose-all"');
   });
 
+  it('installs propose-all and requirement-to-openspec on default openspec init (core profile)', async () => {
+    const init = new InitCommand({
+      tools: 'claude,cursor,agents',
+      force: true,
+      animation: false,
+    });
+
+    await init.execute(testDir);
+
+    // Universal .agents skills
+    const proposeAllSkillPath = path.join(
+      testDir,
+      '.agents',
+      'skills',
+      'openspec-propose-all',
+      'SKILL.md'
+    );
+    expect(await fs.stat(proposeAllSkillPath).then((s) => s.isFile()).catch(() => false)).toBe(true);
+
+    const requirementSkillPath = path.join(
+      testDir,
+      '.agents',
+      'skills',
+      'requirement-to-openspec',
+      'SKILL.md'
+    );
+    expect(await fs.stat(requirementSkillPath).then((s) => s.isFile()).catch(() => false)).toBe(true);
+
+    // Claude Code command
+    const claudeCommandPath = path.join(
+      testDir,
+      '.claude',
+      'commands',
+      'opsx',
+      'propose-all.md'
+    );
+    expect(await fs.stat(claudeCommandPath).then((s) => s.isFile()).catch(() => false)).toBe(true);
+
+    // Cursor command
+    const cursorCommandPath = path.join(
+      testDir,
+      '.cursor',
+      'commands',
+      'opsx-propose-all.md'
+    );
+    expect(await fs.stat(cursorCommandPath).then((s) => s.isFile()).catch(() => false)).toBe(true);
+  });
+
   it('correctly parses a multi-specification planning document and derives plan', async () => {
     const samplePlanningDoc = `# Requirement Analysis and Planning: E-Commerce Platform
 

@@ -148,7 +148,7 @@ Explore never writes code, and writes nothing else unless you ask, or say yes wh
 
 ### Expanded/Full Workflow (custom selection)
 
-If you want explicit scaffold-and-build commands (`/opsx:new`, `/opsx:continue`, `/opsx:ff`, `/opsx:verify`, `/opsx:bulk-archive`, `/opsx:propose-all`, `/opsx:onboard`), enable them with:
+If you want explicit scaffold-and-build commands (`/opsx:new`, `/opsx:continue`, `/opsx:ff`, `/opsx:verify`, `/opsx:bulk-archive`, `/opsx:onboard`), enable them with:
 
 ```bash
 openspec config profile
@@ -581,7 +581,7 @@ For full command details and options, see [Commands](commands.md).
 | `/opsx:sync` | Merge delta specs | Expanded mode, optional |
 | `/opsx:archive` | Complete the change | All work finished |
 | `/opsx:bulk-archive` | Archive multiple changes | Expanded mode, parallel work |
-| `/opsx:propose-all` | Batch propose multiple changes | Expanded mode, from planning doc |
+| `/opsx:propose-all` | Batch propose multiple changes | From planning doc |
 
 ## Next Steps
 
